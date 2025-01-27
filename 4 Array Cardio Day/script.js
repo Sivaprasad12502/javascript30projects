@@ -19,12 +19,110 @@ const inventors = [
     'Benn, Tony', 'Benson, Leana', 'Bent, Silas', 'Berle, Milton', 'Berry, Halle', 'Biko, Steve', 'Beck, Glenn', 'Bergman, Ingmar', 'Black, Elk', 'Berio, Luciano',
     'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
     'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
-  ];
+  ]
 
 
-  const fifteen=inventors.filter(function(inventor){
+  //array.prototype.filter()
+  //filter the first of inventors for those were born in the 1500
+
+  const fifteen=inventors.filter(inventor=>{
     if(inventor.year>=1500&&inventor.year<1600){
-        return true
-    }
+      return true
+  }
+
   })
-  console.log(fifteen)
+
+  
+
+  console.table(fifteen)
+
+  //array.prototype.map()
+
+ //Give us an array of the inventory first and last names
+
+ const fullNames=inventors.map(inventor=>`${inventor.first}${inventor.last}`)
+//  console.log(fullNames)
+ 
+ //array.prototype.sort()
+
+ //sort the inventors by birthdate, oldest to youngest
+
+ const order=inventors.sort(function(a,b){
+  if(a.year>b.year){
+    return 1;
+  }else{
+    return -1
+  }
+ })
+
+ const ordered=inventors.sort((a,b)=>a.year>b.year?1:-1)
+//  console.table(ordered)
+
+
+//array.prototype.reduce()
+
+// How many years didi all the inventors live?    
+
+const totalYears=inventors.reduce((total,inventor)=>{
+  return total+(inventor.passed-inventor.year)
+},0)
+
+// console.log(totalYears)
+
+
+// sort the inventors by years lived
+
+const oldest=inventors.sort(function(a,b){
+  const lastGuy=a.passed-a.year;
+  const nextGuy=b.passed-b.year;
+  return lastGuy>nextGuy?-1:1;
+
+})
+
+// console.table(oldest)
+
+
+//create a list of Boulevards in Paris that containe 'de' anywhere in the name 
+
+// https://en,wikipedia.org/wiki/category:Boulevards_in_paris
+
+// const category = document.querySelector('.mw-category');
+// const links = Array.from(category.querySelectorAll('a'));
+// const de = links
+//            .map(link => link.textContent)
+//            .filter(streetName => streetName.includes('de'));
+
+
+
+
+//sort Exercise
+
+// sort the peopele alphabetically by last name
+
+
+const alphap=people.sort(function(lastone,nexone){
+  const [alast,  afirst]=lastone.split(', ')
+  const [blast, bfirst]=nexone.split(',      ')
+
+  return alast >blast?1:-1
+})
+
+// console.log(alphap)    
+
+// reduce Exercise
+
+// sum up the instances of each of these
+
+const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+
+const transportation =data.reduce(function(obj,item){
+  if(!obj[item]){
+    obj[item]=0;
+  }
+  obj[item]++
+  return obj
+
+},{})
+
+console.table(transportation)
